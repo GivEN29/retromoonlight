@@ -10,7 +10,9 @@ import stat
 RefreshListScript = 'Refresh.sh'
 
 BashHeader = '#!/bin/bash\n'
-StreamStrings = {"720p":'moonlight stream -720 -app ', "1080p": 'moonlight stream -1080 -app -fps 60 -bitrate 50000 -codec h265'}
+StreamStrings = {"720p":'moonlight stream -720 -app ', 
+                 "1080p": 'moonlight stream -1080 -app -fps 60 -bitrate 50000 -codec h265',
+                 "4k": 'moonlight stream -4k -app -fps 60 -bitrate 50000 -codec h265'}
 roms_directory = '/home/pi/RetroPie/roms/moonlight/'
 
 def clear_directory(folder_path):
