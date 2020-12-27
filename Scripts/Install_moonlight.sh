@@ -29,7 +29,18 @@ apt-get install git libopus0 libexpat1 libasound2 libudev1 libavahi-client3 libc
 apt-get install libraspberrypi-dev -y
 
 echo -e "\nInstalling Moonlight..."
-apt-get install moonlight-embedded -y
+git clone https://github.com/irtimmer/moonlight-embedded.git
+cd moonlight-embedded
+git submodule update --init
+mkdir build
+cd build/
+cmake ../
+make
+sudo make install
+sudo ldconfig
+cd ../..
+echo -e "\nMoonlight Installed!"
+
 echo -e "\nInstalling Gamepad..."
 /bin/cat ./gamepad/steel-series-duo.txt >> /usr/share/moonlight/gamecontrollerdb.txt
-echo -e "\nMoonlight Installed!"
+
