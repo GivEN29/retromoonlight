@@ -1,3 +1,5 @@
+#!/bin/python3
+
 """
 Script to generate a launch script for each game available in moonlight
 """
@@ -8,9 +10,8 @@ import stat
 RefreshListScript = 'Refresh.sh'
 
 BashHeader = '#!/bin/bash\n'
-StreamString = 'moonlight stream -720 -app '
+StreamStrings = {"720p":'moonlight stream -720 -app ', "1080p": 'moonlight stream -1080 -app -fps 60 -bitrate 50000 -codec h265'}
 roms_directory = '/home/pi/RetroPie/roms/moonlight/'
-
 
 def clear_directory(folder_path):
     """
@@ -55,12 +56,13 @@ def is_valid_listing(game_listing):
         return False
 
 
-def create_script(game_title):
+def create_script(game_title, stream_string):
     """
     Creates the script to run a game title
     :param game_title: The name of the game to launch
+    :param stream_string: The Moonlight command to launch
     """
-    script = '{}{}\"{}\"'.format(BashHeader, StreamString, game_title)
+    script = '{}{}\"{}\"'.format(BashHeader, stream_string, game_title)
     print('\nCreating a script for {}:'.format(game_title))
     print(script)
     return script
@@ -98,4 +100,5 @@ for gameListing in RawInputList:
     if is_valid_listing(parsedListing) is False:
         continue
     parsedListing = parsedListing.strip().split('.')[1].strip()
-    write_script(create_script(parsedListing), parsedListing)
+    for resolution in StreamStrings:
+        write_script(create_script(f"{parsedListing}_{resolution}", StreamStrings[resolution]), parsedListing)
