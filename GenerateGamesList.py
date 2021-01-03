@@ -10,9 +10,9 @@ import stat
 RefreshListScript = 'Refresh.sh'
 
 BashHeader = '#!/bin/bash\n'
-StreamStrings = {"720p":'moonlight stream -720 -app ', 
-                 "1080p": 'moonlight stream -1080 -app -fps 60 -bitrate 50000 -codec h265',
-                 "4k": 'moonlight stream -4k -app -fps 60 -bitrate 50000 -codec h265'}
+StreamStrings = {
+                 "1080p": 'moonlight stream -1080 -fps 60 -bitrate 50000 -codec h265 -app'
+                }
 roms_directory = '/home/pi/RetroPie/roms/moonlight/'
 
 def clear_directory(folder_path):
@@ -103,4 +103,4 @@ for gameListing in RawInputList:
         continue
     parsedListing = parsedListing.strip().split('.')[1].strip()
     for resolution in StreamStrings:
-        write_script(create_script(f"{parsedListing}_{resolution}", StreamStrings[resolution]), parsedListing)
+        write_script(create_script(f"{parsedListing}", StreamStrings[resolution]), parsedListing)
