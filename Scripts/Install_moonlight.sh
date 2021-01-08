@@ -40,7 +40,3 @@ sudo make install
 sudo ldconfig
 cd ../..
 echo -e "\nMoonlight Installed!"
-
-echo -e "\nInstalling Gamepad..."
-/bin/cat ./gamepad/steel-series-duo.txt >> /usr/share/moonlight/gamecontrollerdb.txt
-
