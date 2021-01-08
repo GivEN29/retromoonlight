@@ -105,7 +105,7 @@ def sanitize(game_name):
 def run(dry_run, verbose):
     try:
         if not dry_run:
-            moonlight_games = read_games_list(sys.argv[3])
+            moonlight_games = read_games_list(sys.argv[1])
             clear_directory(roms_directory)
         else:
             moonlight_games = mock_games_list
@@ -120,6 +120,6 @@ def run(dry_run, verbose):
     except Exception as e:
         exit(e)
 
-dry_run = sys.argv[1]
-verbose = sys.argv[2]
+dry_run = False
+verbose = False
 run(dry_run, verbose)
