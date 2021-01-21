@@ -11,11 +11,7 @@ RefreshListScript = 'Refresh.sh'
 BashHeader = '#!/bin/bash\n'
 # https://github.com/irtimmer/moonlight-embedded/wiki/Usage
 StreamStrings = {
-                 "h264": 'moonlight stream -1080 -fps 60 -bitrate 20000 -codec h264 -app',
-                 "h265": 'moonlight stream -1080 -fps 60 -bitrate 20000 -codec h265 -app',
-                 "surround_264": 'moonlight stream -1080 -fps 60 -bitrate 20000 -codec h264 -surround -app',
-                 "surround_265": 'moonlight stream -1080 -fps 60 -bitrate 20000 -codec h265 -surround -app',
-                 # "4k": 'moonlight stream -4k -fps 60 -bitrate 50000 -codec h265 -app'
+                 "h265": 'moonlight stream -1080 -fps 60 -bitrate 200000 -codec h265 -app'
                 }
 roms_directory = '/home/pi/RetroPie/roms/moonlight/'
 sanitization_tokens = {":": ""," ": "_"}
