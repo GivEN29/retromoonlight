@@ -9,6 +9,7 @@ import stat
 
 RefreshListScript = 'Refresh.sh'
 BashHeader = '#!/bin/bash\n'
+wakeonlanString = "sh wakepc.sh\n"
 # https://github.com/irtimmer/moonlight-embedded/wiki/Usage
 StreamStrings = {
                  "h265": 'moonlight stream -1080 -fps 60 -bitrate 200000 -codec h265 -app'
@@ -17,6 +18,7 @@ roms_directory = '/home/pi/RetroPie/roms/moonlight/'
 sanitization_tokens = {":": ""," ": "_"}
 
 mock_games_list = ["1. Control", "2. Assassin's Creed Valhalla"]
+
 
 
 def clear_directory(folder_path):
@@ -49,13 +51,13 @@ def read_games_list(file_path):
     return input_data
 
 
-def create_script(game_title, stream_string, verbose=False):
+def create_script(game_title, wakeonlan, stream_string, verbose=False):
     """
     Creates the script to run a game title
     :param game_title: The name of the game to launch
     :param stream_string: The Moonlight command to launch
     """
-    script = f"{BashHeader}{stream_string} \"{game_title}\""
+    script = f"{BashHeader}{wakeonlan}{stream_string} \"{game_title}\""
     if verbose:
         print(f"Creating a script for {game_title}:\n{script}")
     return script
@@ -107,11 +109,15 @@ def run(dry_run, verbose):
             sanitized_game_name = sanitize(game_name)
             print(f"Processing {game_name}...")
             for resolution in StreamStrings:
-                launch_script = create_script(f"{game_name}", StreamStrings[resolution], verbose)
+                if wakeonlan:
+                    launch_script = create_script(f"{game_name}", wakeonlanString, StreamStrings[resolution], verbose)
+                else:
+                    launch_script = create_script(f"{game_name}", "", StreamStrings[resolution], verbose)
                 write_script(launch_script, resolution, sanitized_game_name, dry_run, verbose)
     except Exception as e:
         exit(e)
 
 dry_run = False
 verbose = False
+wakeonlan = True
 run(dry_run, verbose)
