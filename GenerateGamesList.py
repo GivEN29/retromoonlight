@@ -12,10 +12,10 @@ BashHeader = '#!/bin/bash\n'
 wakeonlanString = "sh wakepc.sh\n"
 # https://github.com/irtimmer/moonlight-embedded/wiki/Usage
 StreamStrings = {
-                 "h265": 'moonlight stream -1080 -fps 60 -bitrate 200000 -codec h265 -app'
+                 "h264": 'moonlight stream -1080 -fps 60 -bitrate 100000 -app'
                 }
 roms_directory = '/home/pi/RetroPie/roms/moonlight/'
-sanitization_tokens = {":": ""," ": "_"}
+sanitization_tokens = {":": ""," ": "_", "'": ""}
 
 mock_games_list = ["1. Control", "2. Assassin's Creed Valhalla"]
 
@@ -71,7 +71,7 @@ def write_script(script, resolution, game_title, dry_run=False, verbose=False):
     :param game_title: The game title to be used as the file name
     """
     try:
-        script_name = f"{roms_directory}{game_title}_{resolution}.sh"
+        script_name = f"{roms_directory}{game_title}.sh"
         if verbose:
             print(f"Writing {script_name}... ")
         if not dry_run:
